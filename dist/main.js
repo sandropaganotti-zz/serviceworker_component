@@ -1,11 +1,9 @@
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/worker.js').then(function(reg) {
-        navigator.serviceWorker.controller.postMessage({
-            'hello': 'world',
-            cacheName: 'v1',
-            urlsToCache: [
-                "/index.html"
-            ]
+        caches.open('pages').then(function(pages){
+           return pages.add('test.html'); 
+        }).then(function(){
+           console.log('cached!'); 
         });
     }, function(err) {
         console.log('ಠ_ಠ   Nope.', err);
